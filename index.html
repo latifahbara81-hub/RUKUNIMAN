@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petualangan Mengenal 6 Rukun Iman - PAI SLB Fase D</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Lexend (Sangat cocok untuk kemudahan membaca / disleksia / SLB) -->
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#2563EB',
+                            green: '#10B981',
+                            amber: '#F59E0B',
+                            purple: '#8B5CF6',
+                            rose: '#F43F5E',
+                            teal: '#14B8A6'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Lexend', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Lexend', sans-serif;
+            background-color: #F3F4F6;
+            touch-action: manipulation;
+        }
+        .btn-large {
+            min-height: 56px;
+            font-size: 1.15rem;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #E5E7EB;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #9CA3AF;
+            border-radius: 5px;
+        }
+        /* Print styles for Certificate/Summary */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #print-area, #print-area * {
+                visibility: visible;
+            }
+            #print-area {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+        /* Text size modifiers */
+        .text-size-normal { font-size: 1rem; }
+        .text-size-large { font-size: 1.25rem; }
+        .text-size-xlarge { font-size: 1.4rem; }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 flex flex-col min-h-screen select-none">
+
+    <!-- TOP HEADER / NAV BAR -->
+    <header class="bg-indigo-700 text-white shadow-lg sticky top-0 z-50 no-print">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="showScreen('home')">
+                <div class="bg-amber-400 text-indigo-900 font-extrabold rounded-full w-10 h-10 flex items-center justify-center text-xl shadow">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg md:text-xl leading-tight">6 RUKUN IMAN</h1>
+                    <p class="text-xs text-indigo-200">PAI SLB Fase D</p>
+                </div>
+            </div>
+
+            <!-- Header Controls -->
+            <div class="flex items-center space-x-2">
+                <!-- Audio Speech Toggle -->
+                <button id="tts-toggle-btn" onclick="toggleTTS()" title="Suara Pembaca Teks" class="p-2.5 bg-indigo-800 hover:bg-indigo-600 rounded-xl text-amber-300 font-bold flex items-center space-x-1 border border-indigo-500">
+                    <i id="tts-icon" class="fas fa-volume-up text-lg"></i>
+                    <span class="hidden md:inline text-xs">Suara</span>
+                </button>
+
+                <!-- Font Size Selector -->
+                <div class="bg-indigo-800 rounded-xl p-1 border border-indigo-500 flex items-center">
+                    <button onclick="changeFontSize('normal')" class="px-2 py-1 text-xs rounded hover:bg-indigo-600">A</button>
+                    <button onclick="changeFontSize('large')" class="px-2 py-1 text-sm font-bold rounded hover:bg-indigo-600">A+</button>
+                    <button onclick="changeFontSize('xlarge')" class="px-2 py-1 text-base font-extrabold rounded hover:bg-indigo-600">A++</button>
+                </div>
+
+                <!-- Mode Indicator / Switcher -->
+                <button onclick="toggleMode()" id="mode-badge" class="px-3 py-1.5 bg-amber-400 text-indigo-950 rounded-xl text-xs font-bold shadow hover:bg-amber-300">
+                    <i class="fas fa-hands-helping mr-1"></i> Mode Bantuan
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main id="app-container" class="max-w-4xl mx-auto w-full flex-grow p-4 md:p-6 text-size-large">
+
+        <!-- ================= SCREEN 0: HOME / PEMBUKA ================= -->
+        <section id="screen-home" class="screen-content bg-white rounded-3xl p-6 md:p-10 shadow-xl border-4 border-indigo-200 text-center flex flex-col items-center">
+            <div class="inline-block p-4 bg-indigo-50 rounded-full mb-4">
+                <span class="text-6xl md:text-7xl">🕌</span>
+            </div>
+            <h2 class="text-2xl md:text-4xl font-extrabold text-indigo-900 mb-3">
+                Petualangan Mengenal 6 Rukun Iman
+            </h2>
+            <p class="text-gray-600 max-w-xl mb-6 leading-relaxed">
+                Media Pembelajaran Interaktif Agama Islam untuk Peserta Didik SLB Fase D. Mari belajar dengan gembira dan mudah!
+            </p>
+
+            <div class="w-full max-w-md bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 mb-8 text-left">
+                <h3 class="font-bold text-amber-900 flex items-center text-base mb-2">
+                    <i class="fas fa-info-circle mr-2 text-amber-600"></i> Mode Belajar:
+                </h3>
+                <div class="flex items-center justify-between text-sm">
+                    <span id="home-mode-desc" class="text-amber-900 font-medium">Bantuan Guru (Suara & Petunjuk Aktif)</span>
+                    <button onclick="toggleMode()" class="text-xs bg-amber-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-amber-600">Ubah</button>
+                </div>
+            </div>
+
+            <!-- Start Button -->
+            <button onclick="speakText('Selamat datang di Petualangan Mengenal 6 Rukun Iman. Tekan tombol mulai untuk belajar!'); showScreen('intro');" 
+                    class="btn-large w-full max-w-md bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold py-4 px-8 rounded-2xl shadow-lg border-b-4 border-emerald-700 transform active:scale-95 transition flex items-center justify-center space-x-3 text-xl">
+                <span>MULAI BELAJAR</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+
+            <!-- Reset Data Button -->
+            <button onclick="resetProgress()" class="mt-6 text-xs text-slate-400 hover:text-slate-600 underline">
+                Reset Kemajuan Belajar
+            </button>
+        </section>
+
+
+        <!-- ================= SCREEN 1: INTRO & DALIL ================= -->
+        <section id="screen-intro" class="screen-content hidden bg-white rounded-3xl p-6 md:p-8 shadow-xl border-4 border-indigo-100">
+            <div class="flex items-center justify-between border-b-2 border-slate-100 pb-4 mb-6">
+                <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-bold">Pengantar</span>
+                <button onclick="speakCurrentText()" class="text-indigo-600 hover:text-indigo-800 flex items-center font-bold text-sm bg-indigo-50 px-3 py-1.5 rounded-xl">
+                    <i class="fas fa-volume-up mr-2"></i> Dengarkan Teks
+                </button>
+            </div>
+
+            <div id="readable-content-intro" class="space-y-6">
+                <h2 class="text-2xl font-bold text-slate-900">Apa itu Iman?</h2>
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-xl">
+                    <p class="font-medium text-blue-900">
+                        <strong>Iman artinya percaya dan yakin dalam hati.</strong><br>
+                        Sebagai orang Islam, kita wajib percaya kepada 6 Rukun Iman.
+                    </p>
+                </div>
+
+                <div class="bg-amber-50 p-5 rounded-2xl border border-amber-200">
+                    <h3 class="font-bold text-amber-900 mb-2 flex items-center">
+                        <i class="fas fa-book-quran text-amber-600 mr-2"></i> Dalil Rukun Iman (Q.S. Al-Baqarah: 285)
+                    </h3>
+                    <p class="text-right text-2xl font-semibold text-slate-800 mb-3 leading-loose" dir="rtl">
+                        آمَنَ الرَّسُولُ بِمَا أُنْزِلَ إِلَيْهِ مِنْ رَبِّهِ وَالْمُؤْمِنُونَ ۚ كُلٌّ آمَنَ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ
+                    </p>
+                    <p class="text-sm text-slate-700 italic border-t border-amber-200 pt-2">
+                        "Rasul telah beriman kepada Al-Qur'an yang diturunkan kepadanya dari Tuhannya, demikian pula orang-orang yang beriman. Semuanya beriman kepada Allah, malaikat-malaikat-Nya, kitab-kitab-Nya, dan rasul-rasul-Nya..."
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3 pt-2">
+                    <div class="p-3 bg-slate-50 border rounded-xl text-center">
+                        <span class="text-2xl block mb-1">1️⃣</span>
+                        <span class="text-xs font-bold text-slate-700">Iman kepada Allah</span>
+                    </div>
+                    <div class="p-3 bg-slate-50 border rounded-xl text-center">
+                        <span class="text-2xl block mb-1">2️⃣</span>
+                        <span class="text-xs font-bold text-slate-700">Iman kepada Malaikat</span>
+                    </div>
+                    <div class="p-3 bg-slate-50 border rounded-xl text-center">
+                        <span class="text-2xl block mb-1">3️⃣</span>
+                        <span class="text-xs font-bold text-slate-700">Iman kepada Kitab</span>
+                    </div>
+                    <div class="p-3 bg-slate-50 border rounded-xl text-center">
+                        <span class="text-2xl block mb-1">4️⃣</span>
+                        <span class="text-xs font-bold text-slate-700">Iman kepada Rasul</span>
+                    </div>
+                    <div class="p-3 bg-slate-50 border rounded-xl text-center">
+                        <span class="text-2xl block mb-1">5️⃣</span>
+                        <span class="text-xs font-bold text-slate-700">Iman Hari Akhir</span>
+                    </div>
+                    <div class="p-3 bg-slate-50 border rounded-xl text-center">
+                        <span class="text-2xl block mb-1">6️⃣</span>
+                        <span class="text-xs font-bold text-slate-700">Iman Qada & Qadar</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex justify-between items-center mt-8 pt-4 border-t border-slate-200">
+                <button onclick="showScreen('home')" class="px-5 py-3 bg-slate-200 hover:bg-slate-300 font-bold rounded-xl text-slate-700">
+                    <i class="fas fa-home mr-1"></i> Beranda
+                </button>
+                <button onclick="showScreen('menu')" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-md">
+                    Pilih Menu Utama <i class="fas fa-arrow-right ml-1"></i>
+                </button>
+            </div>
+        </section>
+
+
+        <!-- ================= SCREEN 2: MAIN MENU ================= -->
+        <section id="screen-menu" class="screen-content hidden bg-white rounded-3xl p-6 shadow-xl border-4 border-indigo-100">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl md:text-3xl font-extrabold text-indigo-950">Pilih Materi Rukun Iman</h2>
+                <p class="text-slate-600 text-sm mt-1">Tekan salah satu kartu di bawah ini untuk belajar:</p>
+            </div>
+
+            <!-- 6 Grid Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+                <!-- Card 1 -->
+                <button onclick="openLesson(1)" class="p-5 bg-emerald-50 hover:bg-emerald-100 border-2 border-emerald-300 rounded-2xl flex flex-col items-center text-center shadow-sm hover:shadow-md transition group">
+                    <span class="w-12 h-12 bg-emerald-500 text-white font-black text-xl rounded-full flex items-center justify-center mb-2 shadow">1</span>
+                    <span class="text-4xl mb-2">🌍</span>
+                    <h3 class="font-bold text-emerald-950 text-lg group-hover:text-emerald-700">Iman Kepada Allah</h3>
+                    <span id="badge-status-1" class="mt-2 text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-600">Belum Belajar</span>
+                </button>
+
+                <!-- Card 2 -->
+                <button onclick="openLesson(2)" class="p-5 bg-blue-50 hover:bg-blue-100 border-2 border-blue-300 rounded-2xl flex flex-col items-center text-center shadow-sm hover:shadow-md transition group">
+                    <span class="w-12 h-12 bg-blue-500 text-white font-black text-xl rounded-full flex items-center justify-center mb-2 shadow">2</span>
+                    <span class="text-4xl mb-2">✨</span>
+                    <h3 class="font-bold text-blue-950 text-lg group-hover:text-blue-700">Iman Kepada Malaikat</h3>
+                    <span id="badge-status-2" class="mt-2 text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-600">Belum Belajar</span>
+                </button>
+
+                <!-- Card 3 -->
+                <button onclick="openLesson(3)" class="p-5 bg-amber-50 hover:bg-amber-100 border-2 border-amber-300 rounded-2xl flex flex-col items-center text-center shadow-sm hover:shadow-md transition group">
+                    <span class="w-12 h-12 bg-amber-500 text-white font-black text-xl rounded-full flex items-center justify-center mb-2 shadow">3</span>
+                    <span class="text-4xl mb-2">📖</span>
+                    <h3 class="font-bold text-amber-950 text-lg group-hover:text-amber-700">Iman Kepada Kitab</h3>
+                    <span id="badge-status-3" class="mt-2 text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-600">Belum Belajar</span>
+                </button>
+
+                <!-- Card 4 -->
+                <button onclick="openLesson(4)" class="p-5 bg-purple-50 hover:bg-purple-100 border-2 border-purple-300 rounded-2xl flex flex-col items-center text-center shadow-sm hover:shadow-md transition group">
+                    <span class="w-12 h-12 bg-purple-500 text-white font-black text-xl rounded-full flex items-center justify-center mb-2 shadow">4</span>
+                    <span class="text-4xl mb-2">🌙</span>
+                    <h3 class="font-bold text-purple-950 text-lg group-hover:text-purple-700">Iman Kepada Rasul</h3>
+                    <span id="badge-status-4" class="mt-2 text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-600">Belum Belajar</span>
+                </button>
+
+                <!-- Card 5 -->
+                <button onclick="openLesson(5)" class="p-5 bg-rose-50 hover:bg-rose-100 border-2 border-rose-300 rounded-2xl flex flex-col items-center text-center shadow-sm hover:shadow-md transition group">
+                    <span class="w-12 h-12 bg-rose-500 text-white font-black text-xl rounded-full flex items-center justify-center mb-2 shadow">5</span>
+                    <span class="text-4xl mb-2">🌅</span>
+                    <h3 class="font-bold text-rose-950 text-lg group-hover:text-rose-700">Iman Hari Akhir</h3>
+                    <span id="badge-status-5" class="mt-2 text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-600">Belum Belajar</span>
+                </button>
+
+                <!-- Card 6 -->
+                <button onclick="openLesson(6)" class="p-5 bg-teal-50 hover:bg-teal-100 border-2 border-teal-300 rounded-2xl flex flex-col items-center text-center shadow-sm hover:shadow-md transition group">
+                    <span class="w-12 h-12 bg-teal-500 text-white font-black text-xl rounded-full flex items-center justify-center mb-2 shadow">6</span>
+                    <span class="text-4xl mb-2">🌱</span>
+                    <h3 class="font-bold text-teal-950 text-lg group-hover:text-teal-700">Iman Qada & Qadar</h3>
+                    <span id="badge-status-6" class="mt-2 text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-600">Belum Belajar</span>
+                </button>
+            </div>
+
+            <!-- Extra Section: Penerapan & Evaluasi -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-t-2 border-slate-100 pt-5">
+                <button onclick="openLesson(7)" class="p-4 bg-indigo-50 hover:bg-indigo-100 border-2 border-indigo-300 rounded-2xl flex items-center space-x-4 text-left">
+                    <span class="text-4xl">🤝</span>
+                    <div>
+                        <h4 class="font-bold text-indigo-950 text-base">Penerapan Sehari-hari</h4>
+                        <p class="text-xs text-indigo-700">Perilaku jujur, bersyukur & tanggung jawab</p>
+                    </div>
+                </button>
+
+                <button onclick="showScreen('summary')" class="p-4 bg-amber-100 hover:bg-amber-200 border-2 border-amber-400 rounded-2xl flex items-center space-x-4 text-left">
+                    <span class="text-4xl">🏆</span>
+                    <div>
+                        <h4 class="font-bold text-amber-950 text-base">Hasil Belajar & Sertifikat</h4>
+                        <p class="text-xs text-amber-800">Lihat nilai dan cetak ringkasan</p>
+                    </div>
+                </button>
+            </div>
+        </section>
+
+
+        <!-- ================= SCREEN 3: LESSON MATERIAL & QUIZ DISPLAY ================= -->
+        <section id="screen-lesson" class="screen-content hidden bg-white rounded-3xl p-6 md:p-8 shadow-xl border-4 border-indigo-100">
+            <!-- Header Lesson -->
+            <div class="flex items-center justify-between border-b-2 border-slate-100 pb-4 mb-4">
+                <div class="flex items-center space-x-3">
+                    <span id="lesson-number-badge" class="w-9 h-9 bg-indigo-600 text-white font-bold rounded-full flex items-center justify-center text-lg">1</span>
+                    <h2 id="lesson-title" class="text-xl md:text-2xl font-extrabold text-slate-900">Judul Materi</h2>
+                </div>
+                <button onclick="speakCurrentText()" class="text-indigo-600 hover:text-indigo-800 flex items-center font-bold text-sm bg-indigo-50 px-3 py-1.5 rounded-xl border border-indigo-200">
+                    <i class="fas fa-volume-up mr-2"></i> Dengarkan
+                </button>
+            </div>
+
+            <!-- Tab Buttons: Materi vs Aktivitas Kuis -->
+            <div class="flex space-x-2 mb-6">
+                <button id="tab-material-btn" onclick="switchLessonTab('material')" class="flex-1 py-3 font-bold rounded-xl border-2 border-indigo-600 bg-indigo-600 text-white shadow">
+                    <i class="fas fa-book-open mr-2"></i> Materi Pembelajaran
+                </button>
+                <button id="tab-quiz-btn" onclick="switchLessonTab('quiz')" class="flex-1 py-3 font-bold rounded-xl border-2 border-slate-300 bg-slate-100 text-slate-700">
+                    <i class="fas fa-gamepad mr-2"></i> Latihan Kuis
+                </button>
+            </div>
+
+            <!-- TAB 1: MATERIAL CONTENT -->
+            <div id="tab-material-content" class="space-y-6">
+                <!-- Dynamic text content loaded via JS -->
+                <div id="material-body" class="space-y-4 text-slate-800"></div>
+            </div>
+
+            <!-- TAB 2: QUIZ CONTENT -->
+            <div id="tab-quiz-content" class="hidden space-y-6">
+                <div class="bg-amber-50 p-4 rounded-2xl border border-amber-200 flex items-center justify-between">
+                    <div>
+                        <span id="quiz-progress-text" class="text-xs font-bold text-amber-800 uppercase tracking-wide">Soal 1 dari 3</span>
+                        <h4 class="font-bold text-amber-950 text-lg">Ayo Selesaikan Kuis Ini!</h4>
+                    </div>
+                    <span id="quiz-score-badge" class="text-sm bg-amber-200 text-amber-900 font-extrabold px-3 py-1 rounded-full">
+                        Skor: 0
+                    </span>
+                </div>
+
+                <!-- Active Question Container -->
+                <div id="quiz-question-box" class="space-y-4">
+                    <!-- Loaded dynamically -->
+                </div>
+
+                <!-- Feedback Alert Box -->
+                <div id="quiz-feedback" class="hidden p-4 rounded-2xl text-center font-bold text-lg"></div>
+            </div>
+
+            <!-- Footer Lesson Navigation -->
+            <div class="flex justify-between items-center mt-8 pt-4 border-t border-slate-200">
+                <button onclick="showScreen('menu')" class="px-5 py-3 bg-slate-200 hover:bg-slate-300 font-bold rounded-xl text-slate-700">
+                    <i class="fas fa-th-large mr-1"></i> Menu Utama
+                </button>
+
+                <div class="flex space-x-2">
+                    <button id="btn-prev-lesson" onclick="navigateLesson(-1)" class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <button id="btn-next-lesson" onclick="navigateLesson(1)" class="px-5 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow">
+                        Materi Berikutnya <i class="fas fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= SCREEN 4: EVALUATION & SUMMARY ================= -->
+        <section id="screen-summary" class="screen-content hidden bg-white rounded-3xl p-6 md:p-8 shadow-xl border-4 border-amber-200">
+            <div id="print-area" class="space-y-6">
+                <div class="text-center border-b-2 border-slate-100 pb-4">
+                    <div class="inline-block p-3 bg-amber-100 rounded-full mb-2">
+                        <span class="text-5xl">🏆</span>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-indigo-950">Ringkasan Hasil Belajar</h2>
+                    <p class="text-slate-600 text-sm">Petualangan Mengenal 6 Rukun Iman - PAI SLB Fase D</p>
+                </div>
+
+                <!-- Student Name Input (Editable for Print) -->
+                <div class="bg-indigo-50 p-4 rounded-2xl border border-indigo-200 flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <div class="w-full sm:w-auto flex-grow">
+                        <label class="block text-xs font-bold text-indigo-900 mb-1">Nama Peserta Didik / Siswa:</label>
+                        <input type="text" id="student-name" value="Siswa Luar Biasa" placeholder="Isi nama peserta didik..." class="w-full p-2.5 rounded-xl border border-indigo-300 font-bold text-indigo-950 focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <div class="text-center sm:text-right">
+                        <span class="text-xs font-bold text-slate-500 block">Tanggal Selesai:</span>
+                        <span id="summary-date" class="font-bold text-slate-800">23 Oktober 2026</span>
+                    </div>
+                </div>
+
+                <!-- Score Overview Cards -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
+                    <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-200">
+                        <span class="text-xs text-emerald-800 font-bold block mb-1">Materi Selesai</span>
+                        <span id="summary-completed-count" class="text-3xl font-extrabold text-emerald-600">0/7</span>
+                    </div>
+                    <div class="p-4 bg-blue-50 rounded-2xl border border-blue-200">
+                        <span class="text-xs text-blue-800 font-bold block mb-1">Kuis Dijawab</span>
+                        <span id="summary-answered-count" class="text-3xl font-extrabold text-blue-600">0/23</span>
+                    </div>
+                    <div class="p-4 bg-purple-50 rounded-2xl border border-purple-200">
+                        <span class="text-xs text-purple-800 font-bold block mb-1">Jawaban Benar</span>
+                        <span id="summary-correct-count" class="text-3xl font-extrabold text-purple-600">0</span>
+                    </div>
+                    <div class="p-4 bg-amber-50 rounded-2xl border border-amber-200">
+                        <span class="text-xs text-amber-800 font-bold block mb-1">Total Nilai</span>
+                        <span id="summary-total-score" class="text-3xl font-extrabold text-amber-600">0</span>
+                    </div>
+                </div>
+
+                <!-- Recommended Review Section -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                    <h3 class="font-bold text-slate-800 mb-3 flex items-center">
+                        <i class="fas fa-clipboard-check text-indigo-600 mr-2"></i> Evaluasi Kemampuan & Catatan Guru:
+                    </h3>
+                    <p id="summary-feedback-text" class="text-sm text-slate-700 leading-relaxed">
+                        Selesaikan materi dan kuis untuk melihat rekomendasi evaluasi belajar.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-3 pt-6 no-print">
+                <button onclick="window.print()" class="flex-1 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-xl shadow flex items-center justify-center space-x-2">
+                    <i class="fas fa-print"></i>
+                    <span>Cetak Ringkasan Hasil Belajar</span>
+                </button>
+                <button onclick="showScreen('menu')" class="flex-1 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold rounded-xl shadow flex items-center justify-center space-x-2">
+                    <i class="fas fa-undo"></i>
+                    <span>Kembali Belajar</span>
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-200 text-slate-600 text-center py-4 text-xs no-print mt-auto border-t border-slate-300">
+        <p class="font-medium">Media Pembelajaran Interaktif PAI SLB Fase D &copy; 2026</p>
+        <p class="text-slate-500 mt-0.5">Didesain Inklusif untuk Peserta Didik Berkebutuhan Khusus</p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        /* ================= STATE MANAGEMENT ================= */
+        const APP_STATE = {
+            currentScreen: 'home',
+            currentLessonId: 1,
+            currentTab: 'material', // 'material' or 'quiz'
+            ttsEnabled: true,
+            assistedMode: true, // Mode Bantuan (Autis/Tunagrahita)
+            fontSize: 'large', // 'normal', 'large', 'xlarge'
+            progress: {
+                completedLessons: [], // array of lesson IDs
+                quizAnswers: {}, // key: qKey, val: isCorrect
+                quizScores: {} // key: lessonId, val: score
+            }
+        };
+
+        /* ================= CURRICULUM DATA ================= */
+        const LESSONS_DATA = [
+            {
+                id: 1,
+                title: "1. Iman Kepada Allah",
+                icon: "🌍",
+                color: "emerald",
+                materialHtml: `
+                    <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-200">
+                        <h3 class="text-lg font-bold text-emerald-950 mb-2">Artinya: Percaya Bahwa Allah Itu Ada</h3>
+                        <p class="mb-3">Allah adalah Tuhan kita. Allah Maha Esa (Allah itu Satu, tidak ada Tuhan selain Allah).</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-slate-900 border-b pb-1">🌟 Asmaul Husna (Nama Baik Allah):</h4>
+                        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+                            <li class="p-3 bg-slate-50 rounded-xl border"><strong>Ar-Rahman:</strong> Allah Maha Pengasih</li>
+                            <li class="p-3 bg-slate-50 rounded-xl border"><strong>Ar-Rahim:</strong> Allah Maha Penyayang</li>
+                            <li class="p-3 bg-slate-50 rounded-xl border"><strong>Al-Khaliq:</strong> Allah Maha Pencipta</li>
+                            <li class="p-3 bg-slate-50 rounded-xl border"><strong>As-Sami’:</strong> Allah Maha Mendengar</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-4 bg-amber-50 rounded-2xl border border-amber-200">
+                        <h4 class="font-bold text-amber-950 mb-2">🌿 Ciptaan Allah di Sekitar Kita:</h4>
+                        <p class="text-sm text-amber-900 mb-2">Manusia, hewan, tumbuhan, langit, bumi, dan air adalah ciptaan Allah SWT.</p>
+                        <div class="flex space-x-3 text-3xl">
+                            <span>🧍</span><span>🐈</span><span>🌳</span><span>🌧️</span><span>☀️</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-blue-50 rounded-2xl border border-blue-200">
+                        <h4 class="font-bold text-blue-950 mb-1">❤️ Cara Mengamalkannya:</h4>
+                        <p class="text-sm text-blue-900">Selalu mengucapkan <em>Alhamdulillah</em>, rajin beribadah/shalat, dan merawat alam ciptaan Allah.</p>
+                    </div>
+                `,
+                quizzes: [
+                    {
+                        id: "q1_1",
+                        type: "mc",
+                        question: "Allah itu Maha Esa. Apa arti Maha Esa?",
+                        options: ["Ada Dua", "Maha Satu / Tunggal", "Ada Banyak"],
+                        correctIndex: 1,
+                        explanation: "Maha Esa artinya Allah itu Satu, tidak ada Tuhan selain Allah."
+                    },
+                    {
+                        id: "q1_2",
+                        type: "tf",
+                        question: "Kucing, pohon, dan hujan adalah ciptaan Allah SWT.",
+                        correctAnswer: true,
+                        explanation: "Benar! Semua hewan, tumbuhan, dan alam ciptaan Allah."
+                    },
+                    {
+                        id: "q1_3",
+                        type: "match",
+                        question: "Pasangkan Asmaul Husna dengan artinya yang benar:",
+                        pairs: [
+                            { item: "Al-Khaliq", match: "Maha Pencipta" },
+                            { item: "Ar-Rahman", match: "Maha Pengasih" }
+                        ]
+                    }
+                ]
+            },
+
+            {
+                id: 2,
+                title: "2. Iman Kepada Malaikat",
+                icon: "✨",
+                color: "blue",
+                materialHtml: `
+                    <div class="p-4 bg-blue-50 rounded-2xl border border-blue-200">
+                        <h3 class="text-lg font-bold text-blue-950 mb-2">Siapa itu Malaikat?</h3>
+                        <p class="text-sm">Malaikat adalah makhluk ciptaan Allah yang dibuat dari cahaya (Nur). Malaikat selalu taat dan tidak pernah berbuat dosa.</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-slate-900 border-b pb-1">📜 Nama & Tugas Malaikat yang Wajib Diketahui:</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+                            <div class="p-3 bg-slate-50 rounded-xl border"><strong>Jibril:</strong> Menyampaikan wahyu</div>
+                            <div class="p-3 bg-slate-50 rounded-xl border"><strong>Mikail:</strong> Membagikan rezeki & hujan</div>
+                            <div class="p-3 bg-slate-50 rounded-xl border"><strong>RaQib:</strong> Mencatat amal baik</div>
+                            <div class="p-3 bg-slate-50 rounded-xl border"><strong>Atid:</strong> Mencatat amal buruk</div>
+                            <div class="p-3 bg-slate-50 rounded-xl border"><strong>Izrail:</strong> Mencabut nyawa</div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-200">
+                        <h4 class="font-bold text-emerald-950 mb-1">💡 Perilaku Beriman Kepada Malaikat:</h4>
+                        <p class="text-sm text-emerald-900">Selalu berbuat jujur dan hati-hati karena malaikat Raqib dan Atid selalu mencatat perbuatan kita.</p>
+                    </div>
+                `,
+                quizzes: [
+                    {
+                        id: "q2_1",
+                        type: "mc",
+                        question: "Malaikat yang bertugas menyampaikan wahyu adalah...",
+                        options: ["Malaikat Jibril", "Malaikat Mikail", "Malaikat Izrail"],
+                        correctIndex: 0,
+                        explanation: "Malaikat Jibril bertugas menyampaikan wahyu Allah kepada Nabi."
+                    },
+                    {
+                        id: "q2_2",
+                        type: "tf",
+                        question: "Malaikat Raqib bertugas mencatat amal baik manusia.",
+                        correctAnswer: true,
+                        explanation: "Benar! Malaikat Raqib mencatat kebaikan kita."
+                    },
+                    {
+                        id: "q2_3",
+                        type: "mc",
+                        question: "Sikap jujur saat tidak ada orang yang melihat adalah bukti beriman kepada...",
+                        options: ["Malaikat pencatat amal", "Teman sekolah", "Orang lain"],
+                        correctIndex: 0,
+                        explanation: "Ingat, ada Malaikat Raqib dan Atid yang selalu mencatat amal perbuatan kita."
+                    }
+                ]
+            },
+
+            {
+                id: 3,
+                title: "3. Iman Kepada Kitab Allah",
+                icon: "📖",
+                color: "amber",
+                materialHtml: `
+                    <div class="p-4 bg-amber-50 rounded-2xl border border-amber-200">
+                        <h3 class="text-lg font-bold text-amber-950 mb-2">Apa itu Kitab Allah?</h3>
+                        <p class="text-sm">Kitab Allah adalah kumpulan firman Allah yang diturunkan kepada para Nabi sebagai pedoman hidup manusia.</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-slate-900 border-b pb-1">📚 4 Kitab Allah & Nabi Penerimanya:</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+                            <div class="p-3 bg-slate-50 rounded-xl border border-amber-300"><strong>Kitab Taurat:</strong> Nabi Musa a.s.</div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-amber-300"><strong>Kitab Zabur:</strong> Nabi Dawud a.s.</div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-amber-300"><strong>Kitab Injil:</strong> Nabi Isa a.s.</div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-amber-300"><strong>Kitab Al-Qur'an:</strong> Nabi Muhammad SAW</div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-indigo-50 rounded-2xl border border-indigo-200">
+                        <h4 class="font-bold text-indigo-950 mb-1">💚 Menyayangi Al-Qur'an:</h4>
+                        <p class="text-sm text-indigo-900">Membaca Al-Qur'an (atau iqra), mendengarkan murattal, dan mengamalkan reaches kebaikan di sekolah/rumah.</p>
+                    </div>
+                `,
+                quizzes: [
+                    {
+                        id: "q3_1",
+                        type: "mc",
+                        question: "Kitab Suci Al-Qur'an diturunkan kepada Nabi...",
+                        options: ["Nabi Musa a.s.", "Nabi Muhammad SAW", "Nabi Isa a.s."],
+                        correctIndex: 1,
+                        explanation: "Al-Qur'an diturunkan kepada Nabi Muhammad SAW sebagai pedoman hidup umat Islam."
+                    },
+                    {
+                        id: "q3_2",
+                        type: "match",
+                        question: "Pasangkan nama Kitab dan Nabinya:",
+                        pairs: [
+                            { item: "Kitab Taurat", match: "Nabi Musa a.s." },
+                            { item: "Kitab Injil", match: "Nabi Isa a.s." }
+                        ]
+                    },
+                    {
+                        id: "q3_3",
+                        type: "tf",
+                        question: "Membaca Al-Qur'an setiap hari adalah contoh mencintai kitab Allah.",
+                        correctAnswer: true,
+                        explanation: "Benar! Rajin mengaji adalah bentuk iman kepada kitab Allah."
+                    }
+                ]
+            },
+
+            {
+                id: 4,
+                title: "4. Iman Kepada Rasul Allah",
+                icon: "🌙",
+                color: "purple",
+                materialHtml: `
+                    <div class="p-4 bg-purple-50 rounded-2xl border border-purple-200">
+                        <h3 class="text-lg font-bold text-purple-950 mb-2">Siapa itu Rasul?</h3>
+                        <p class="text-sm">Rasul adalah manusia pilihan Allah yang diutus untuk mengajarkan kebaikan dan memimpin umat manusia.</p>
+                    </div>
+
+                    <p class="text-sm font-semibold text-slate-700">Jumlah Nabi & Rasul yang wajib kita ketahui ada <strong>25 Nabi</strong>. Nabi pertama adalah Nabi Adam a.s., dan nabi terakhir adalah Nabi Muhammad SAW.</p>
+
+                    <div class="p-4 bg-amber-50 rounded-2xl border border-amber-200">
+                        <h4 class="font-bold text-amber-950 mb-2">🌸 Sifat Teladan Rasul:</h4>
+                        <ul class="list-disc list-inside text-sm text-amber-900 space-y-1">
+                            <li><strong>Jujur (Siddiq):</strong> Berkata benar.</li>
+                            <li><strong>Dapat dipercaya (Amanah):</strong> Bertanggung jawab.</li>
+                            <li><strong>Sabar & Menyanyangi sesama.</strong></li>
+                        </ul>
+                    </div>
+                `,
+                quizzes: [
+                    {
+                        id: "q4_1",
+                        type: "mc",
+                        question: "Nabi dan Rasul terakhir penutup para nabi adalah...",
+                        options: ["Nabi Adam a.s.", "Nabi Ibrahim a.s.", "Nabi Muhammad SAW"],
+                        correctIndex: 2,
+                        explanation: "Nabi Muhammad SAW adalah nabi terakhir (Khatamul Anbiya)."
+                    },
+                    {
+                        id: "q4_2",
+                        type: "tf",
+                        question: "Rasul mengajari kita untuk selalu berkata jujur dan sabar.",
+                        correctAnswer: true,
+                        explanation: "Benar! Jujur dan sabar adalah akhlak mulia para Rasul."
+                    },
+                    {
+                        id: "q4_3",
+                        type: "mc",
+                        question: "Bila menemukan barang milik teman di kelas, tindakan amanah adalah...",
+                        options: ["Menyimpannya sendiri", "Mengembalikannya kepada teman/guru", "Membuangnya"],
+                        correctIndex: 1,
+                        explanation: "Amanah artinya mengembalikan barang yang bukan milik kita."
+                    }
+                ]
+            },
+
+            {
+                id: 5,
+                title: "5. Iman Kepada Hari Akhir",
+                icon: "🌅",
+                color: "rose",
+                materialHtml: `
+                    <div class="p-4 bg-rose-50 rounded-2xl border border-rose-200">
+                        <h3 class="text-lg font-bold text-rose-950 mb-2">Apa itu Hari Akhir (Kiamat)?</h3>
+                        <p class="text-sm">Hari akhir adalah hari hancurnya dunia beserta isinya. Setelah itu manusia dibangkitkan untuk menerima balasan amal baik dan buruk.</p>
+                    </div>
+
+                    <div class="p-4 bg-blue-50 rounded-2xl border border-blue-200">
+                        <h4 class="font-bold text-blue-950 mb-1">🕊️ Mengapa Tidak Perlu Takut?</h4>
+                        <p class="text-sm text-blue-900">Iman hari akhir membuat kita tenang dan semangat berbuat baik. Siapa yang rajin berbuat baik, Allah akan memberinya pahala surga yang indah.</p>
+                    </div>
+
+                    <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-200">
+                        <h4 class="font-bold text-emerald-950 mb-1">⭐ Hikmah Beriman:</h4>
+                        <p class="text-sm text-emerald-900">Bertanggung jawab atas tugas sekolah, rajin shalat, mau meminta maaf bila bersalah, dan saling membantu.</p>
+                    </div>
+                `,
+                quizzes: [
+                    {
+                        id: "q5_1",
+                        type: "tf",
+                        question: "Hari kiamat adalah hari hancurnya alam semesta.",
+                        correctAnswer: true,
+                        explanation: "Benar, hari kiamat adalah hari akhir kehidupan di dunia."
+                    },
+                    {
+                        id: "q5_2",
+                        type: "mc",
+                        question: "Balasan yang diberikan Allah bagi orang yang banyak berbuat baik adalah...",
+                        options: ["Hukuman", "Pahala Surga", "Kerugian"],
+                        correctIndex: 1,
+                        explanation: "Allah Maha Adil dan memberikan pahala surga bagi hamba-Nya yang berbuat baik."
+                    },
+                    {
+                        id: "q5_3",
+                        type: "mc",
+                        question: "Jika tidak sengaja merusakkan pensil teman, sikap bertanggung jawab adalah...",
+                        options: ["Minta maaf dan menggantinya", "Lari dan bersembunyi", "Pura-pura tidak tahu"],
+                        correctIndex: 0,
+                        explanation: "Meminta maaf adalah bentuk tanggung jawab orang beriman."
+                    }
+                ]
+            },
+
+            {
+                id: 6,
+                title: "6. Iman Qada & Qadar",
+                icon: "🌱",
+                color: "teal",
+                materialHtml: `
+                    <div class="p-4 bg-teal-50 rounded-2xl border border-teal-200">
+                        <h3 class="text-lg font-bold text-teal-950 mb-2">Apa itu Qada & Qadar?</h3>
+                        <p class="text-sm">Qada & Qadar adalah takdir atau ketentuan Allah bagi seluruh makhluk-Nya.</p>
+                    </div>
+
+                    <div class="p-4 bg-amber-50 rounded-2xl border border-amber-200 space-y-2">
+                        <h4 class="font-bold text-amber-950">🔑 3 Langkah Kunci Sukses:</h4>
+                        <ol class="list-decimal list-inside text-sm text-amber-900 space-y-1">
+                            <li><strong>Ikhtiar (Berusaha):</strong> Belajar dan berlatih dengan giat.</li>
+                            <li><strong>Doa:</strong> Memohon bantuan kepada Allah.</li>
+                            <li><strong>Tawakal:</strong> Berserah diri dan menerima hasil dari Allah dengan sabar & syukur.</li>
+                        </ol>
+                    </div>
+
+                    <div class="p-4 bg-slate-100 rounded-2xl border border-slate-300">
+                        <h4 class="font-bold text-slate-900 mb-1">😊 Contoh Sikap Betul:</h4>
+                        <p class="text-sm text-slate-700">Jika dapat nilai bagus = Bersyukur. Jika belum berhasil = Tidak menangis/marah, tapi giat berlatih lagi.</p>
+                    </div>
+                `,
+                quizzes: [
+                    {
+                        id: "q6_1",
+                        type: "mc",
+                        question: "Berusaha sungguh-sungguh belajar membaca disebut...",
+                        options: ["Tawakal", "Ikhtiar (Berusaha)", "Pasrah"],
+                        correctIndex: 1,
+                        explanation: "Ikhtiar adalah usaha nyata kita sebelum berdoa dan berserah diri."
+                    },
+                    {
+                        id: "q6_2",
+                        type: "tf",
+                        question: "Bila kita mengalami kegagalan, kita tidak boleh putus asa dan harus mencoba lagi.",
+                        correctAnswer: true,
+                        explanation: "Benar! Anak saleh selalu sabar dan pantang menyerah."
+                    },
+                    {
+                        id: "q6_3",
+                        type: "match",
+                        question: "Urutkan langkah ikhtiar sampai tawakal:",
+                        pairs: [
+                            { item: "Langkah 1", match: "Berusaha Belajar" },
+                            { item: "Langkah 2", match: "Berdoa & Tawakal" }
+                        ]
+                    }
+                ]
+            },
+
+            {
+                id: 7,
+                title: "7. Penerapan Sehari-Hari",
+                icon: "🤝",
+                color: "indigo",
+                materialHtml: `
+                    <div class="p-4 bg-indigo-50 rounded-2xl border border-indigo-200">
+                        <h3 class="text-lg font-bold text-indigo-950 mb-2">Mengamalkan 6 Rukun Iman</h3>
+                        <p class="text-sm">Iman bukan hanya diingat, tetapi harus dipraktikkan dalam kehidupan sehari-hari di rumah, sekolah, dan lingkungan.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                        <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-300">
+                            <strong class="text-emerald-950 block mb-1">🏫 Di Sekolah:</strong>
+                            <p class="text-emerald-900">Datang tepat waktu, merapikan meja, menghormati guru, bersikap jujur saat tes.</p>
+                        </div>
+                        <div class="p-3 bg-amber-50 rounded-xl border border-amber-300">
+                            <strong class="text-amber-950 block mb-1">🏠 Di Rumah:</strong>
+                            <p class="text-amber-900">Membantu orang tua, patuh, menjaga kebersihan kamar, bersyukur atas makanan.</p>
+                        </div>
+                    </div>
+                `,
+                quizzes: [
+                    {
+                        id: "q7_1",
+                        type: "mc",
+                        question: "Contoh perilaku jujur di sekolah adalah...",
+                        options: ["Mencontek pekerjaan teman", "Tidak berbohong kepada guru", "Menyembunyikan buku sekolah"],
+                        correctIndex: 1,
+                        explanation: "Tidak berbohong adalah contoh nyata perilaku jujur."
+                    },
+                    {
+                        id: "q7_2",
+                        type: "mc",
+                        question: "Melihat sampah berserakan di lantai kelas, perbuatan yang baik adalah...",
+                        options: ["Membuangnya ke tempat sampah", "Membiarkannya saja", "Menyalahkan teman"],
+                        correctIndex: 0,
+                        explanation: "Menjaga kebersihan kelas adalah sebagian dari iman."
+                    },
+                    {
+                        id: "q7_3",
+                        type: "tf",
+                        question: "Menghormati guru dan membantu teman yang kesulitan adalah amalan anak saleh.",
+                        correctAnswer: true,
+                        explanation: "Benar! Menghormati guru dan menolong sesama adalah cerminan iman."
+                    },
+                    {
+                        id: "q7_4",
+                        type: "mc",
+                        question: "Saat diberikan makanan oleh ibu, ucapan yang mencerminkan rasa syukur adalah...",
+                        options: ["Alhamdulillah, terima kasih Bu", "Mengapa lauknya ini?", "Pergi meninggalkan meja"],
+                        correctIndex: 0,
+                        explanation: "Mengucapkan Alhamdulillah adalah bentuk rasa syukur kita kepada Allah dan orang tua."
+                    },
+                    {
+                        id: "q7_5",
+                        type: "tf",
+                        question: "Minta maaf jika melakukan kesalahan adalah ciri anak yang bertanggung jawab.",
+                        correctAnswer: true,
+                        explanation: "Benar! Berani meminta maaf adalah sikap hebat terpuji."
+                    }
+                ]
+            }
+        ];
+
+        /* ================= NAVIGATION & SCREEN LOGIC ================= */
+        function showScreen(screenId) {
+            APP_STATE.currentScreen = screenId;
+            document.querySelectorAll('.screen-content').forEach(el => el.classList.add('hidden'));
+
+            const target = document.getElementById(`screen-${screenId}`);
+            if (target) {
+                target.classList.remove('hidden');
+            }
+
+            if (screenId === 'summary') {
+                renderSummaryScreen();
+            } else if (screenId === 'menu') {
+                updateMenuBadges();
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function openLesson(lessonId) {
+            APP_STATE.currentLessonId = lessonId;
+            APP_STATE.currentTab = 'material';
+
+            const lesson = LESSONS_DATA.find(l => l.id === lessonId);
+            if (!lesson) return;
+
+            // Render Header
+            document.getElementById('lesson-number-badge').textContent = lesson.id;
+            document.getElementById('lesson-title').textContent = lesson.title;
+
+            // Render Material Content
+            document.getElementById('material-body').innerHTML = lesson.materialHtml;
+
+            // Set Tab UI
+            switchLessonTab('material');
+
+            // Render Quiz Content
+            renderQuizForCurrentLesson();
+
+            showScreen('lesson');
+
+            // Speak intro if in Assisted Mode
+            if (APP_STATE.assistedMode) {
+                speakText(`Materi ${lesson.title}`);
+            }
+        }
+
+        function switchLessonTab(tab) {
+            APP_STATE.currentTab = tab;
+            const matBtn = document.getElementById('tab-material-btn');
+            const quizBtn = document.getElementById('tab-quiz-btn');
+            const matContent = document.getElementById('tab-material-content');
+            const quizContent = document.getElementById('tab-quiz-content');
+
+            if (tab === 'material') {
+                matBtn.className = "flex-1 py-3 font-bold rounded-xl border-2 border-indigo-600 bg-indigo-600 text-white shadow";
+                quizBtn.className = "flex-1 py-3 font-bold rounded-xl border-2 border-slate-300 bg-slate-100 text-slate-700";
+                matContent.classList.remove('hidden');
+                quizContent.classList.add('hidden');
+            } else {
+                quizBtn.className = "flex-1 py-3 font-bold rounded-xl border-2 border-indigo-600 bg-indigo-600 text-white shadow";
+                matBtn.className = "flex-1 py-3 font-bold rounded-xl border-2 border-slate-300 bg-slate-100 text-slate-700";
+                quizContent.classList.remove('hidden');
+                matContent.classList.add('hidden');
+            }
+        }
+
+        function navigateLesson(direction) {
+            let nextId = APP_STATE.currentLessonId + direction;
+            if (nextId < 1) nextId = 1;
+            if (nextId > LESSONS_DATA.length) {
+                showScreen('summary');
+                return;
+            }
+            openLesson(nextId);
+        }
+
+        /* ================= QUIZ RENDERING & INTERACTION ================= */
+        let currentQuestionIndex = 0;
+
+        function renderQuizForCurrentLesson() {
+            currentQuestionIndex = 0;
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            const lesson = LESSONS_DATA.find(l => l.id === APP_STATE.currentLessonId);
+            if (!lesson || !lesson.quizzes.length) return;
+
+            const q = lesson.quizzes[currentQuestionIndex];
+            const qBox = document.getElementById('quiz-question-box');
+            const feedbackBox = document.getElementById('quiz-feedback');
+            feedbackBox.classList.add('hidden');
+
+            // Progress text
+            document.getElementById('quiz-progress-text').textContent = `Soal ${currentQuestionIndex + 1} dari ${lesson.quizzes.length}`;
+            
+            // Score badge update
+            const score = APP_STATE.progress.quizScores[lesson.id] || 0;
+            document.getElementById('quiz-score-badge').textContent = `Skor: ${score}`;
+
+            let html = `
+                <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200">
+                    <p class="font-bold text-slate-900 text-lg mb-4">${q.question}</p>
+            `;
+
+            if (q.type === 'mc') {
+                html += `<div class="space-y-3">`;
+                q.options.forEach((opt, idx) => {
+                    html += `
+                        <button onclick="checkAnswer('mc', ${idx})" class="w-full text-left p-4 rounded-xl border-2 border-slate-200 bg-white hover:border-indigo-500 hover:bg-indigo-50 font-semibold transition flex items-center justify-between">
+                            <span>${opt}</span>
+                            <i class="fas fa-chevron-right text-slate-300"></i>
+                        </button>
+                    `;
+                });
+                html += `</div>`;
+            } else if (q.type === 'tf') {
+                html += `
+                    <div class="grid grid-cols-2 gap-4">
+                        <button onclick="checkAnswer('tf', true)" class="p-5 bg-emerald-50 border-2 border-emerald-300 hover:bg-emerald-100 rounded-2xl text-center font-extrabold text-emerald-900 text-lg">
+                            <span class="text-3xl block mb-1">👍</span> BENAR
+                        </button>
+                        <button onclick="checkAnswer('tf', false)" class="p-5 bg-rose-50 border-2 border-rose-300 hover:bg-rose-100 rounded-2xl text-center font-extrabold text-rose-900 text-lg">
+                            <span class="text-3xl block mb-1">👎</span> SALAH
+                        </button>
+                    </div>
+                `;
+            } else if (q.type === 'match') {
+                html += `<div class="space-y-3">`;
+                q.pairs.forEach((pair, idx) => {
+                    html += `
+                        <div class="p-3 bg-white border rounded-xl flex flex-col sm:flex-row items-center justify-between gap-2">
+                            <span class="font-bold text-slate-800">${pair.item}</span>
+                            <span class="text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg">➡️ ${pair.match}</span>
+                        </div>
+                    `;
+                });
+                html += `
+                    <button onclick="checkAnswer('match', true)" class="mt-3 w-full p-4 bg-indigo-600 text-white font-bold rounded-xl shadow">
+                        Saya Sudah Memahami Pasangan Ini 👍
+                    </button>
+                </div>`;
+            }
+
+            html += `</div>`;
+            qBox.innerHTML = html;
+
+            if (APP_STATE.assistedMode) {
+                speakText(q.question);
+            }
+        }
+
+        function checkAnswer(type, userChoice) {
+            const lesson = LESSONS_DATA.find(l => l.id === APP_STATE.currentLessonId);
+            const q = lesson.quizzes[currentQuestionIndex];
+            const feedbackBox = document.getElementById('quiz-feedback');
+
+            let isCorrect = false;
+
+            if (type === 'mc') {
+                isCorrect = (userChoice === q.correctIndex);
+            } else if (type === 'tf') {
+                isCorrect = (userChoice === q.correctAnswer);
+            } else if (type === 'match') {
+                isCorrect = true; // Simple matching understanding check
+            }
+
+            // Save Progress
+            APP_STATE.progress.quizAnswers[q.id] = isCorrect;
+            
+            if (isCorrect) {
+                APP_STATE.progress.quizScores[lesson.id] = (APP_STATE.progress.quizScores[lesson.id] || 0) + 10;
+                feedbackBox.className = "p-4 rounded-2xl text-center font-bold text-lg bg-emerald-100 text-emerald-900 border border-emerald-300";
+                feedbackBox.innerHTML = `🎉 HEBAT! Jawabanmu Benar!<br><span class="text-xs font-normal">${q.explanation || ''}</span>`;
+                if (APP_STATE.ttsEnabled) speakText("Hore! Jawabanmu benar! Kamu hebat!");
+            } else {
+                feedbackBox.className = "p-4 rounded-2xl text-center font-bold text-lg bg-rose-100 text-rose-900 border border-rose-300";
+                feedbackBox.innerHTML = `😊 Jangan patah semangat! Mari coba lagi.<br><span class="text-xs font-normal">${q.explanation || ''}</span>`;
+                if (APP_STATE.ttsEnabled) speakText("Tidak apa-apa, mari coba pelajari lagi ya.");
+            }
+
+            feedbackBox.classList.remove('hidden');
+
+            // Mark Lesson Completed
+            if (!APP_STATE.progress.completedLessons.includes(lesson.id)) {
+                APP_STATE.progress.completedLessons.push(lesson.id);
+            }
+            saveLocalProgress();
+
+            // Next button or auto transition
+            setTimeout(() => {
+                if (currentQuestionIndex < lesson.quizzes.length - 1) {
+                    currentQuestionIndex++;
+                    displayQuestion();
+                } else {
+                    feedbackBox.innerHTML += `<div class="mt-3 text-sm text-indigo-900">Kuis Selesai! Kamu hebat sudah menyelesaikan kuis materi ini.</div>`;
+                }
+            }, 3000);
+        }
+
+        /* ================= ACCESSIBILITY & AUDIO (TTS) ================= */
+        function speakText(text) {
+            if (!APP_STATE.ttsEnabled) return;
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // stop previous
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'id-ID';
+                utterance.rate = 0.9; // Agak perlahan untuk SLB
+                utterance.pitch = 1.0;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function speakCurrentText() {
+            let container = null;
+            if (APP_STATE.currentScreen === 'intro') {
+                container = document.getElementById('readable-content-intro');
+            } else if (APP_STATE.currentScreen === 'lesson') {
+                container = document.getElementById('material-body');
+            }
+            if (container) {
+                speakText(container.innerText);
+            }
+        }
+
+        function toggleTTS() {
+            APP_STATE.ttsEnabled = !APP_STATE.ttsEnabled;
+            const btn = document.getElementById('tts-toggle-btn');
+            const icon = document.getElementById('tts-icon');
+
+            if (APP_STATE.ttsEnabled) {
+                btn.classList.replace('bg-slate-600', 'bg-indigo-800');
+                icon.className = "fas fa-volume-up text-lg";
+                speakText("Suara pembaca aktif.");
+            } else {
+                btn.classList.replace('bg-indigo-800', 'bg-slate-600');
+                icon.className = "fas fa-volume-mute text-lg";
+                if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            }
+        }
+
+        function toggleMode() {
+            APP_STATE.assistedMode = !APP_STATE.assistedMode;
+            const badge = document.getElementById('mode-badge');
+            const homeDesc = document.getElementById('home-mode-desc');
+
+            if (APP_STATE.assistedMode) {
+                badge.innerHTML = `<i class="fas fa-hands-helping mr-1"></i> Mode Bantuan`;
+                badge.className = "px-3 py-1.5 bg-amber-400 text-indigo-950 rounded-xl text-xs font-bold shadow hover:bg-amber-300";
+                if (homeDesc) homeDesc.textContent = "Bantuan Guru (Suara & Petunjuk Aktif)";
+                speakText("Mode Bantuan Aktif.");
+            } else {
+                badge.innerHTML = `<i class="fas fa-user-check mr-1"></i> Latihan Mandiri`;
+                badge.className = "px-3 py-1.5 bg-indigo-900 text-indigo-100 rounded-xl text-xs font-bold shadow hover:bg-indigo-800";
+                if (homeDesc) homeDesc.textContent = "Latihan Mandiri (Suara Otomatis Dinonaktifkan)";
+            }
+        }
+
+        function changeFontSize(size) {
+            APP_STATE.fontSize = size;
+            const main = document.getElementById('app-container');
+            main.classList.remove('text-size-normal', 'text-size-large', 'text-size-xlarge');
+            if (size === 'normal') main.classList.add('text-size-normal');
+            else if (size === 'large') main.classList.add('text-size-large');
+            else if (size === 'xlarge') main.classList.add('text-size-xlarge');
+        }
+
+        /* ================= SUMMARY & EVALUATION REPORT ================= */
+        function renderSummaryScreen() {
+            // Set current date
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('summary-date').textContent = today.toLocaleDateString('id-ID', options);
+
+            // Calculate stats
+            const completedCount = APP_STATE.progress.completedLessons.length;
+            document.getElementById('summary-completed-count').textContent = `${completedCount}/7`;
+
+            let answeredCount = 0;
+            let correctCount = 0;
+            for (let qk in APP_STATE.progress.quizAnswers) {
+                answeredCount++;
+                if (APP_STATE.progress.quizAnswers[qk] === true) correctCount++;
+            }
+
+            document.getElementById('summary-answered-count').textContent = `${answeredCount}`;
+            document.getElementById('summary-correct-count').textContent = `${correctCount}`;
+
+            let totalScore = 0;
+            for (let lid in APP_STATE.progress.quizScores) {
+                totalScore += APP_STATE.progress.quizScores[lid];
+            }
+            document.getElementById('summary-total-score').textContent = totalScore;
+
+            // Feedback Narrative
+            const feedbackEl = document.getElementById('summary-feedback-text');
+            if (completedCount >= 6) {
+                feedbackEl.innerHTML = `
+                    <span class="text-emerald-700 font-bold block mb-1">🌟 Sangat Baik / Mandiri:</span>
+                    Peserta didik telah menyelesaikan seluruh materi Rukun Iman dengan sangat baik. Mampu mengenali konsep dasar, Malaikat, Kitab, Rasul, Hari Akhir, dan Takdir serta contoh penerapannya.
+                `;
+            } else if (completedCount >= 3) {
+                feedbackEl.innerHTML = `
+                    <span class="text-amber-700 font-bold block mb-1">👍 Berkembang Baik:</span>
+                    Peserta didik sudah mempelajari sebagian materi Rukun Iman. Disarankan untuk melanjutkan materi yang belum selesai bersama guru pembimbing.
+                `;
+            } else {
+                feedbackEl.innerHTML = `
+                    <span class="text-indigo-700 font-bold block mb-1">🌱 Perlu Bimbingan Intensif:</span>
+                    Peserta didik memerlukan bimbingan tambahan dan pengulangan materi secara bertahap menggunakan bantuan suara dan media gambar.
+                `;
+            }
+        }
+
+        function updateMenuBadges() {
+            LESSONS_DATA.forEach(lesson => {
+                const badge = document.getElementById(`badge-status-${lesson.id}`);
+                if (badge) {
+                    if (APP_STATE.progress.completedLessons.includes(lesson.id)) {
+                        badge.textContent = "Selesai ✓";
+                        badge.className = "mt-2 text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300";
+                    } else {
+                        badge.textContent = "Belum Belajar";
+                        badge.className = "mt-2 text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-600";
+                    }
+                }
+            });
+        }
+
+        /* ================= LOCAL STORAGE ================= */
+        function saveLocalProgress() {
+            try {
+                localStorage.setItem('rukun_iman_slb_progress', JSON.stringify(APP_STATE.progress));
+            } catch (e) {
+                console.log("LocalStorage error:", e);
+            }
+        }
+
+        function loadLocalProgress() {
+            try {
+                const saved = localStorage.getItem('rukun_iman_slb_progress');
+                if (saved) {
+                    APP_STATE.progress = JSON.parse(saved);
+                }
+            } catch (e) {
+                console.log("Error loading saved data:", e);
+            }
+        }
+
+        function resetProgress() {
+            if (confirm("Apakah Anda yakin ingin mengulang seluruh kemajuan belajar?")) {
+                APP_STATE.progress = {
+                    completedLessons: [],
+                    quizAnswers: {},
+                    quizScores: {}
+                };
+                saveLocalProgress();
+                alert("Kemajuan belajar berhasil direset!");
+                showScreen('home');
+            }
+        }
+
+        /* ================= INITIALIZATION ================= */
+        window.onload = function() {
+            loadLocalProgress();
+            showScreen('home');
+        };
+    </script>
+</body>
+</html>
